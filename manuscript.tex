@@ -1,5 +1,4 @@
 % Options for packages loaded elsewhere
-% Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -9,22 +8,21 @@
 ]{sn-jnl}
 
 
-\usepackage{xcolor}
+
 \usepackage{amsmath,amssymb}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math} % this also loads fontspec
+  \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
 \fi
 \usepackage{lmodern}
-\ifPDFTeX\else
-  % xetex/luatex font selection
+\ifPDFTeX\else  
+    % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -42,6 +40,9 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 % Make \paragraph and \subparagraph free-standing
 \makeatletter
 \ifx\paragraph\undefined\else
@@ -67,7 +68,8 @@
 \makeatother
 
 
-\usepackage{longtable,booktabs,array}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -79,32 +81,17 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 % Set default figure placement to htbp
+\makeatletter
 \def\fps@figure{htbp}
 \makeatother
-
-
-
-
-
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-
-
-
 
 %%%% Standard Packages
 
@@ -167,9 +154,14 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage{bookmark}
+
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same}
+\urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
   pdftitle={Orchestrating Microbiome Analysis with Bioconductor},
   pdfauthor={Tuomas Borman; Giulio Benedetti; Geraldson Muluh; Aura Raulo; Benjamin Valderrama; Artur Sannikov; Stefanie Peschel; Yihan Liu; Rasmus Hindström; OMA consortium; Katariina Pärnänen; Christian L. Müller; Aki S. Havulinna; Sudarshan Shetty; Marcel Ramos; Domenick J. Braccia; Héctor Corrada Bravo; Felix G.M. Ernst; Levi Waldron; Thomaz F. S. Bastiaanssen; Himel Mallick; Leo Lahti},
@@ -409,7 +401,7 @@ SpatialExperiment \citep{righelli2022} classes.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/fig-bioc_packages-1.pdf}}
+\includegraphics{manuscript_files/figure-pdf/fig-bioc_packages-1.pdf}
 
 }
 
@@ -502,7 +494,7 @@ irreproducibility in ad hoc multi-table analyses. To summarize, flexible
 mapping of samples across several data objects is a key for efficient
 data integration, method sharing, and interoperability.
 
-\textbf{Scalability} Enhanced scalability is one of the advantages of
+\textbf{Scalability.} Enhanced scalability is one of the advantages of
 our framework, and essential with increasingly large and multi-modal
 data sets. This can be achieved by parallelization, out-of-memory
 analyses leveraging the built-in support for sparse and delayed
@@ -519,16 +511,16 @@ blocks by samples, features, or other data elements. Non-decomposable
 operations, such as distance matrices and ordinations, must be realized
 in memory or parallelized by a dedicated algorithm: accelerated versions
 of common microbiome methods, including Faith phylogenetic alpha
-diversity \citep{armstrong2021} and striped Unifrac beta diversity
+diversity \citep{armstrong2021} and striped UniFrac beta diversity
 \citep{mcdonald2018}, have been incorporated in the (Tree)SE-based
 framework through the mia package.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1800}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.6200}}
-  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0300}}
-  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0900}}
-  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0800}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.6200}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0300}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0900}}
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0800}}@{}}
 \caption{Key elements of the Bioconductor data containers for microbiome
 analysis. }\label{tbl-elements}\tabularnewline
 \toprule\noalign{}
@@ -600,10 +592,10 @@ studies and tens of thousands samples that can be accessed with the
 available tools for research and educational purposes.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4000}}
-  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
-  >{\raggedleft\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4000}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2000}}@{}}
 \caption{Open microbiome data resources (last accessed on 2026-07-05).
 }\label{tbl-dataresources}\tabularnewline
 \toprule\noalign{}
@@ -709,7 +701,7 @@ memory consumption represents a key area for further development.
 
 \centering{
 
-\pandocbounded{\includegraphics[keepaspectratio]{manuscript_files/figure-pdf/fig-benchmarking-1.pdf}}
+\includegraphics{manuscript_files/figure-pdf/fig-benchmarking-1.pdf}
 
 }
 
@@ -795,7 +787,7 @@ variability, outliers, homogeneity of variance and other aspects that
 may need to be considered in downstream data analysis. The mia and
 miaViz packages provide convenient access to many operations for the
 integrative data containers regarding common tasks in microbiome data
-exploration and visualization (\textbf{?@fig-downstream\_analyses}).
+exploration and visualization (Figure~\ref{fig-downstream_analyses}).
 
 \textbf{Filtering and agglomeration.} Microbiome datasets can contain
 tens of thousands of unique features depending on the sequencing
@@ -906,7 +898,7 @@ analyses between modalities.
 \textbf{Community indicators.} Various general indicators are available
 to quantify the microbial community state or other sample properties.
 Community diversity is a common measure in microbial ecology
-\citep{bastiaanssen_bugs1_2023} (\textbf{?@fig-downstream\_analyses}).
+\citep{bastiaanssen_bugs1_2023} (Figure~\ref{fig-downstream_analyses}).
 Alpha diversity metrics generally quantify the observed or estimated
 number of distinct taxa (\emph{richness}) and their distribution
 (\emph{evenness}). Many diversity indices (\emph{e.g.}, Shannon index),
@@ -927,17 +919,17 @@ diversity measures \citep{cassol2025}. Alpha diversity indices have been
 frequently applied to measure also resistome diversity
 \citep{lee2023, salehi2025}, and potentially other modalities.
 
-\textbf{Community similarity} is commonly evaluated with beta diversity
-measures, which can be used for quantitative comparisons of multivariate
-community composition. Our framework supports common dissimilarity
-metrics in microbial ecology, including Bray-Curtis, Jaccard, Aitchison
-\citep{bastiaanssen_bugs1_2023}, and the accelerated phylogeny-aware
-(striped) UniFrac \citep{mcdonald2018}. Community dissimilarity is
-commonly visualized with unsupervised ordination that projects data onto
-a lower-dimensional space. Among unsupervised techniques, the most
-commonly used ones include Principal Component Analysis (PCA) and
-Principal Coordinate Analysis (PCoA)
-(\textbf{?@fig-downstream\_analyses}). Statistical tests (\emph{e.g.},
+\textbf{Community similarity.} This is commonly evaluated with beta
+diversity measures, which can be used for quantitative comparisons of
+multivariate community composition. Our framework supports common
+dissimilarity metrics in microbial ecology, including Bray-Curtis,
+Jaccard, Aitchison \citep{bastiaanssen_bugs1_2023}, and the accelerated
+phylogeny-aware (striped) UniFrac \citep{mcdonald2018}. Community
+dissimilarity is commonly visualized with unsupervised ordination that
+projects data onto a lower-dimensional space. Among unsupervised
+techniques, the most commonly used ones include Principal Component
+Analysis (PCA) and Principal Coordinate Analysis (PCoA)
+(Figure~\ref{fig-downstream_analyses}). Statistical tests (\emph{e.g.},
 PERMANOVA) and supervised ordination methods, such as distance-based
 Redundancy Analysis (dbRDA), can complement the unsupervised analyses,
 and help uncover and quantify covariation between community composition
@@ -959,7 +951,7 @@ Differential Prevalence Analysis (DPA) methods identify indicator
 microbial features whose abundances (DAA) or prevalences (DPA) vary
 across study groups or continuous gradients, for example in terms of
 spatial or temporal dissimilarity between samples
-(\textbf{?@fig-downstream\_analyses}). Many widely used DAA methods
+(Figure~\ref{fig-downstream_analyses}). Many widely used DAA methods
 support the (Tree)SE framework, including for instance ANCOM-BC2
 \citep{lin2024}, LimROTS \citep{anwar2025}, MaAsLin3
 \citep{nickols2026}, and radEmu \citep{clausen2026}, and benchdamic
@@ -1047,7 +1039,7 @@ provide the infrastructure supporting the integration of microbial
 abundance data with other omics modalities, such as transcriptomes,
 proteomes, or metabolomes \citep{hintikka2021, mangnier2025}, resistomes
 \citep{salehi2025, lee2023}, host genomes \citep{qin2022}, or
-environmental exposomes (\textbf{?@fig-downstream\_analyses}). By
+environmental exposomes (Figure~\ref{fig-downstream_analyses}). By
 leveraging standardized containers (Fig. \ref{fig:datacontainers}),
 users get fluent access to a growing number of multi-omic methods.
 Containers reduce the need for manual data wrangling and mitigate the
@@ -1113,6 +1105,52 @@ enhanced by additional workflow management tools such as \emph{targets}
 in R \citep{landau2021} or \emph{Nextflow} for cross-language operations
 \citep{di2017nextflow}.
 
+\begin{figure}
+
+\centering{
+
+\includegraphics{manuscript_files/figure-pdf/fig-downstream_analyses-1.pdf}
+
+}
+
+\caption{\label{fig-downstream_analyses}\textbf{Selected single-omic and
+multi-omic visualizations for microbiome data.} The figure demonstrates
+visualization workflows available in the ecosystem using the openly
+available multi-omics mouse dataset distributed through the mia package
+\citep{hintikka2021}. The dataset contains microbiota (16S rRNA) and
+metabolomics measurements from mice receiving either a high-fat or
+low-fat diet, with or without xylooligosaccharide (XOS) supplementation.
+\textbf{a}, Taxonomic relationships among bacterial genera are shown as
+a phylogenetic tree alongside a heatmap of their abundances across
+samples. Samples are grouped by diet group. Most genera belong to the
+phylum \emph{Firmicutes}, while \emph{Alistipes} and
+\emph{Parabacteroides} have the highest mean abundances.
+\textbf{Single-omic analyses (b--d)} demonstrate common analyses of
+individual microbiome data layers. \textbf{b}, Faith's phylogenetic
+diversity \citep{armstrong2021} summarizes within-sample microbial
+diversity and shows no clear difference between diet groups. \textbf{c},
+Distance-based redundancy analysis (dbRDA) based on UniFrac distances
+\citep{lozupone2005} visualizes differences in microbial community
+composition explained by the experimental variables, revealing
+separation according to diet. \textbf{d}, Differential prevalence
+analysis performed with MaAsLin3 \citep{nickols2026} identifies
+bacterial genera whose prevalence differs significantly between diet
+groups (adjusted \emph{P} \textless{} 0.05). \textbf{Multi-omic analyses
+(e--f)} integrate microbiota and metabolomics data. \textbf{e},
+Joint-RPCA provides an unsupervised low-dimensional representation of
+the combined microbiota and metabolomics data. The five strongest
+loading vectors from each data layer indicate the features contributing
+most to the displayed ordination axes. Vectors pointing in similar
+directions indicate positively associated features, whereas vectors
+pointing in opposite directions indicate negative associations.
+\textbf{f}, Signed feature importances from an IntegratedLearner model
+quantify the contribution of individual microbiota and metabolite
+features to supervised prediction of dietary group, indicating that
+metabolite features are generally more predictive than microbiota
+features, with glucose identified as the most important predictor.}
+
+\end{figure}%
+
 \section{Accessible analysis and community}\label{sec-community}
 
 Modern science is embodied by a critical community capable of assessing
@@ -1130,10 +1168,10 @@ This stimulates continuous software improvement and promotes the
 emergence and dissemination of evidence-based best practices
 \citep{berg2020, barker2022, hocquet2024}. Simple approaches should be
 preferred over complex ones by default, and key analyses should be
-complemented with visual exploration and verification, and expressive
-code and meaningful comments support reproducibility and verification.
-Such practices can greatly improve the transparency and robustness of
-the analyses and interpretability of the results. OMA facilitates
+complemented with visual exploration and verification. Expressive code
+and meaningful comments support reproducibility and verification. Such
+practices can greatly improve the transparency and robustness of the
+analyses and interpretability of the results. OMA facilitates
 standardization across studies by promoting the use of harmonized data
 structures, validated methods, and informed default settings. This
 facilitates methods sharing and benchmarking, helping to establish

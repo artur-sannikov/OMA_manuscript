@@ -1177,7 +1177,7 @@ model <- IntegratedLearner(
 #| echo: false
 #| message: false
 #| warning: false
-#| fig-cap: "**Selected single-omic and multi-omic visualizations for microbiome data.** The figure demonstrates visualization workflows available in the ecosystem using the openly available multi-omics mouse dataset distributed through the mia package [@hintikka2021]. The dataset contains microbiota (16S rRNA) and metabolomics measurements from mice receiving either a high-fat or low-fat diet, with or without xylooligosaccharide (XOS) supplementation. **a**, Taxonomic relationships among bacterial genera represented as a tree. Most genera belong to the phylum *Firmicutes*, while *Alistipes* and *Parabacteroides* have the highest mean abundances. **Single-omic analyses (b–d)** demonstrate common analyses of individual microbiome data layers. **b**, Faith's phylogenetic diversity [@armstrong2021] summarizes within-sample microbial diversity and shows no clear difference between diet groups. **c**, Distance-based redundancy analysis (dbRDA) based on UniFrac distances [@lozupone2005] visualizes differences in microbial community composition explained by the experimental variables, revealing separation according to diet. **d**, Differential prevalence analysis performed with MaAsLin3 [@nickols2026] identifies bacterial genera whose prevalence differs significantly between diet groups (adjusted *P* < 0.05). **Multi-omic analyses (e–f)** integrate microbiota and metabolomics data. **e**, Joint-RPCA provides an unsupervised low-dimensional representation of the combined microbiota and metabolomics data. The five strongest loading vectors from each data layer indicate the features contributing most to the displayed ordination axes. Vectors pointing in similar directions indicate positively associated features, whereas vectors pointing in opposite directions indicate negative associations. **f**, Signed feature importances from an IntegratedLearner model quantify the contribution of individual microbiota and metabolite features to supervised prediction of dietary group, indicating that metabolite features are generally more predictive than microbiota features, with glucose identified as the most important predictor."
+#| fig-cap: "**Selected single-omic and multi-omic visualizations for microbiome data.** The figure demonstrates visualization workflows available in the ecosystem using the openly available multi-omics mouse dataset distributed through the mia package [@hintikka2021]. The dataset contains microbiota (16S rRNA) and metabolomics measurements from mice receiving either a high-fat or low-fat diet, with or without xylooligosaccharide (XOS) supplementation. **a**, Taxonomic relationships among bacterial genera are shown as a phylogenetic tree alongside a heatmap of their abundances across samples. Samples are grouped by diet group. Most genera belong to the phylum *Firmicutes*, while *Alistipes* and *Parabacteroides* have the highest mean abundances. **Single-omic analyses (b–d)** demonstrate common analyses of individual microbiome data layers. **b**, Faith's phylogenetic diversity [@armstrong2021] summarizes within-sample microbial diversity and shows no clear difference between diet groups. **c**, Distance-based redundancy analysis (dbRDA) based on UniFrac distances [@lozupone2005] visualizes differences in microbial community composition explained by the experimental variables, revealing separation according to diet. **d**, Differential prevalence analysis performed with MaAsLin3 [@nickols2026] identifies bacterial genera whose prevalence differs significantly between diet groups (adjusted *P* < 0.05). **Multi-omic analyses (e–f)** integrate microbiota and metabolomics data. **e**, Joint-RPCA provides an unsupervised low-dimensional representation of the combined microbiota and metabolomics data. The five strongest loading vectors from each data layer indicate the features contributing most to the displayed ordination axes. Vectors pointing in similar directions indicate positively associated features, whereas vectors pointing in opposite directions indicate negative associations. **f**, Signed feature importances from an IntegratedLearner model quantify the contribution of individual microbiota and metabolite features to supervised prediction of dietary group, indicating that metabolite features are generally more predictive than microbiota features, with glucose identified as the most important predictor."
 #| fig-width: 20
 #| fig-height: 15
 
@@ -1193,15 +1193,18 @@ temp <- sapply(pkgs, function(x) {
     suppressMessages(require(x, character.only = TRUE))
 })
 
-# Create individual panels -----------------------------------------------------
+# Create individual plots -----------------------------------------------------
 
-# Phylogenetic tree coloured by phylum and mean abundance
-p_tree <- plotRowTree(
+# Heatmap with tree
+p_heatmap <- plotHeatmap(
     altExp(mae[[1]], "prev_genus"),
+    assay.type = "counts",
+    scale = TRUE,
+    center = TRUE,
+    col.var = "Fat",
+    show.tree = TRUE,
     edge.colour.by = "Phylum",
-    show.label = rowTree(altExp(mae[[1]], "prev_genus"))$tip.label,
-    tip.colour.by = "log(mean abundance)",
-    label.font.size = 2
+    tip.colour.by = "log(mean abundance)"
 )
 
 # Alpha diversity
@@ -1315,34 +1318,13 @@ p_joint_rpca <- p_joint_rpca +
         legend.key = element_blank()
     )
 
-p_tree <- p_tree + common_theme
 p_feature_importances <- p_feature_importances + common_theme
 
 # Fine-tune individual panels --------------------------------------------------
 
-# Reduce tree width and move legends inside the panel
-p_tree <- p_tree +
-    xlim_tree(1) +
-    guides(
-        fill = guide_colorbar(
-            position = "inside",
-            title.position = "top",
-            theme = theme(
-                legend.position.inside = c(1.5, 0.5),
-                legend.justification = c(0, 1)
-            ),
-            barheight = unit(2.5, "cm"),
-            barwidth = unit(0.4, "cm")
-        ),
-        colour = guide_legend(
-            position = "inside",
-            title.position = "top",
-            theme = theme(
-                legend.position.inside = c(1.5, 0.5),
-                legend.justification = c(0, 1)
-            )
-        )
-    )
+# Remove sample names from heatmap
+p_heatmap <- p_heatmap + 
+  theme(axis.text.x = element_blank())
 
 # Remove redundant legends and harmonize axis labels
 p_alpha <- p_alpha +
@@ -1373,7 +1355,7 @@ tag_theme <- theme(
     plot.tag.position = c(0.01, 0.99)
 )
 
-p_tree <- p_tree + labs(tag = "a") + tag_theme
+p_heatmap[[1]] <- p_heatmap[[1]] + labs(tag = "a") + tag_theme
 p_alpha <- p_alpha + labs(tag = "b") + tag_theme
 p_rda <- p_rda + labs(tag = "c") + tag_theme
 p_forest <- p_forest + labs(tag = "d") + tag_theme
@@ -1413,12 +1395,12 @@ title_multi <- wrap_elements(
 
 # Combine all panels into the final figure
 final <-
-    p_tree /
+    p_heatmap /
     title_single /
     panel_single_omic /
     title_multi /
     panel_multi_omics +
-    plot_layout(heights = c(3, 0.08, 1, 0.08, 1))
+    plot_layout(heights = c(2, 0.08, 1, 0.08, 1))
 
 final
 ```
