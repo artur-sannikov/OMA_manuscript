@@ -818,13 +818,13 @@ microbiome research include relative abundance \citep{gloor2017},
 phylogenetic ILR (PhILR) \citep{silverman2017}, centered log-ratio
 (CLR), and robust CLR (rCLR) \citep{martino2019}. The latter three aim
 to mitigate compositionality bias. A related concept that controls for
-unequal sampling depth is data rarefaction, i.e.~repeatedly subsampling
-data to equal read depth and averaging the computed metrics to mitigate
-information loss \citep{schloss2024b} that could arise from subsampling
-(\emph{rarefying}) data to equal read depth without such iteration
-\citep{mcmurdie2014, schloss2024, willis2019b}. Our framework supports
-these and a variety of other transformations commonly applied to
-microbiome data.
+unequal sampling depth is data rarefaction, \emph{i.e.} repeatedly
+subsampling data to equal read depth and averaging the computed metrics
+to mitigate information loss \citep{schloss2024b} that could arise from
+subsampling (\emph{rarefying}) data to equal read depth without such
+iteration \citep{mcmurdie2014, schloss2024, willis2019b}. Our framework
+supports these and a variety of other transformations commonly applied
+to microbiome data.
 
 \textbf{Data enrichment.} Incorporating additional data, such as
 transformed feature abundance tables, is a frequent operation in applied
@@ -893,7 +893,8 @@ reproducible benchmarking.
 The following sections provide an overview of some of the currently
 available tools, encompassing standard methods for taxonomic,
 metagenomic, and functional abundance tables as well as integrative
-analyses between modalities.
+analyses between modalities. A comprehensive listing of microbiome
+analysis tools and resources is maintained in the online book.
 
 \textbf{Community indicators.} Various general indicators are available
 to quantify the microbial community state or other sample properties.
@@ -957,8 +958,8 @@ support the (Tree)SE framework, including for instance ANCOM-BC2
 \citep{nickols2026}, and radEmu \citep{clausen2026}, and benchdamic
 benchmarking pipeline \citep{calgaro2022}. More recently, DPA methods
 have seen increasing adoption in microbiome research. They ignore
-abundance data, and focus on comparing feature prevalence
-i.e.~presence/absence profiles. Recent implementations include MaAsLin3
+abundance data, and focus on comparing feature prevalence \emph{i.e.}
+presence/absence profiles. Recent implementations include MaAsLin3
 \citep{nickols2026} and the probabilistic DiPPER \citep{pelto2026}.
 Leveraging the interoperability of the framework, several of these
 methods have also found applications with other omics modalities,
@@ -1040,7 +1041,7 @@ abundance data with other omics modalities, such as transcriptomes,
 proteomes, or metabolomes \citep{hintikka2021, mangnier2025}, resistomes
 \citep{salehi2025, lee2023}, host genomes \citep{qin2022}, or
 environmental exposomes (Figure~\ref{fig-downstream_analyses}). By
-leveraging standardized containers (Fig. \ref{fig:datacontainers}),
+leveraging standardized containers (Figure \ref{fig:datacontainers}),
 users get fluent access to a growing number of multi-omic methods.
 Containers reduce the need for manual data wrangling and mitigate the
 risk of errors (\emph{e.g.}, sample mismatches or data formatting), and
@@ -1065,13 +1066,14 @@ for instance IntegratedLearner \citep{mallick2024}, which can leverage
 dependencies between omics layers towards improved prediction
 performance. These and other methods natively support Bioconductor's
 multi-assay framework. Additional tools are provided by multi-omic
-toolkits such as the multi-omic discriminant analysis DIABLO
-\citep{singh2019} and mixOmics \citep{rohart2017}, which do not yet
-support the same data containers but can be used seamlessly by using
-converters or a straightforward extraction of the abundance tables,
-sample metadata, or other relevant data elements. The unified
-integrative framework that we have adopted can accelerate methods
-development, benchmarking, and standardization.
+toolkits such as mixOmics \citep{rohart2017} provide additional tools,
+including the discriminant analysis method DIABLO \citep{singh2019} and
+other integration approaches. These tools do not yet support the same
+data containers but can be used seamlessly by using converters or a
+straightforward extraction of the abundance tables, sample metadata, or
+other relevant data elements. The unified integrative framework that we
+have adopted can accelerate methods development, benchmarking, and
+standardization.
 
 \textbf{Other methods and programming environments.} Several other
 methods and workflows have been employed in microbiome data science. Our
@@ -1113,41 +1115,23 @@ in R \citep{landau2021} or \emph{Nextflow} for cross-language operations
 
 }
 
-\caption{\label{fig-downstream_analyses}\textbf{Selected single-omic and
-multi-omic visualizations for microbiome data.} The figure demonstrates
-visualization workflows available in the ecosystem using the openly
-available multi-omics mouse dataset distributed through the mia package
-\citep{hintikka2021}. The dataset contains microbiota (16S rRNA) and
-metabolomics measurements from mice receiving either a high-fat or
-low-fat diet, with or without xylooligosaccharide (XOS) supplementation.
-\textbf{a}, Taxonomic relationships among bacterial genera are shown as
-a phylogenetic tree alongside a heatmap of their abundances across
-samples. Samples are grouped by diet group. Most genera belong to the
-phylum \emph{Firmicutes}, while \emph{Alistipes} and
-\emph{Parabacteroides} have the highest mean abundances.
-\textbf{Single-omic analyses (b--d)} demonstrate common analyses of
-individual microbiome data layers. \textbf{b}, Faith's phylogenetic
-diversity \citep{armstrong2021} summarizes within-sample microbial
-diversity and shows no clear difference between diet groups. \textbf{c},
-Distance-based redundancy analysis (dbRDA) based on UniFrac distances
-\citep{lozupone2005} visualizes differences in microbial community
-composition explained by the experimental variables, revealing
-separation according to diet. \textbf{d}, Differential prevalence
-analysis performed with MaAsLin3 \citep{nickols2026} identifies
-bacterial genera whose prevalence differs significantly between diet
-groups (adjusted \emph{P} \textless{} 0.05). \textbf{Multi-omic analyses
-(e--f)} integrate microbiota and metabolomics data. \textbf{e},
-Joint-RPCA provides an unsupervised low-dimensional representation of
-the combined microbiota and metabolomics data. The five strongest
-loading vectors from each data layer indicate the features contributing
-most to the displayed ordination axes. Vectors pointing in similar
-directions indicate positively associated features, whereas vectors
-pointing in opposite directions indicate negative associations.
-\textbf{f}, Signed feature importances from an IntegratedLearner model
-quantify the contribution of individual microbiota and metabolite
-features to supervised prediction of dietary group, indicating that
-metabolite features are generally more predictive than microbiota
-features, with glucose identified as the most important predictor.}
+\caption{\label{fig-downstream_analyses}\textbf{Microbiome analysis
+workflows in the Bioconductor ecosystem.} The figure demonstrates a
+range of single-omic and multi-omic analytical approaches available for
+microbiome research. Using a publicly available multi-omics mouse
+dataset (taxonomic and metabolomic measurements) \citep{hintikka2021},
+we illustrate: \textbf{(a)} taxonomic visualization through phylogenetic
+trees and abundance heatmaps; \textbf{(b--d)} common single-omic
+analyses including Faith's phylogenetic diversity \citep{armstrong2021},
+community composition ordination (dbRDA based on UniFrac dissimilarities
+\citep{lozupone2005}), and differential prevalence testing
+\citep{nickols2026}; and \textbf{(e--f)} multi-omic integration
+strategies combining microbiota and metabolomics data through
+unsupervised dimensionality reduction (Joint-RPCA \citep{vargas2026}) to
+identify shared variation across data layers, and supervised machine
+learning (IntegratedLearner \citep{mallick2024}) to rank features by
+their strength of association with experimental conditions or phenotypes
+of interest.}
 
 \end{figure}%
 
@@ -1240,9 +1224,9 @@ activities \citep{drnevich2025}. An active community of developers and
 users thrives online, supporting the software sustainability and
 promoting good practices in scientific computing \citep{wilson2017}. The
 community interacts via several online communication channels, including
-Bioconductor Zulip, GitHub platform, and an email list. The development
-is influenced by feedback from the user community through these
-channels, regular meetings, and training workshops.
+Bioconductor support site, Zulip, GitHub platform, and an email list.
+The development is influenced by feedback from the user community
+through these channels, regular meetings, and training workshops.
 
 \section{Outlook}\label{sec-discussion}
 
@@ -1310,7 +1294,7 @@ comprehensive guidance in the OMA online book, to support independent
 learning and reproducible analysis in microbiome research and beyond
 \citep{timmis2024, drnevich2025}. We welcome new community contributions
 of well-documented methods and workflow demonstrations. As the field
-evolves, the developer communities will continue to integrate new tools
+evolves, the developer community will continue to integrate new tools
 and approaches to improve integrative analyses of microbiome data.
 
 \subsection{Data availability}\label{data-availability}
