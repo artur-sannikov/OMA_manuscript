@@ -1512,7 +1512,7 @@ computational prediction of microbial function and metabolites, and integration 
 
 Building upon a coordinated community effort, we have reported the development of a comprehensive methods ecosystem for multi-modal microbiome data science in R/Bioconductor, built on widely adopted Bioconductor data containers, software libraries, open data resources, tutorials, and a growing community of developers.
 
-The users can benefit from an extended collection of end-to-end case studies demonstrating how different example analyses can be conducted in practice, from original source data to results. Hence, we have provided comprehensive guidance in the OMA online book, to support independent learning and reproducible analysis in microbiome research and beyond [@timmis2024; @drnevich2025]. We welcome new community contributions of well-documented methods and workflow demonstrations. As the field evolves, the developer communities will continue to integrate new tools and approaches to improve integrative analyses of microbiome data.
+The users can benefit from an extended collection of end-to-end case studies demonstrating how different example analyses can be conducted in practice, from original source data to results. Hence, we have provided comprehensive guidance in the OMA online book, to support independent learning and reproducible analysis in microbiome research and beyond [@timmis2024; @drnevich2025]. We welcome new community contributions of well-documented methods and workflow demonstrations. As the field evolves, the developer community will continue to integrate new tools and approaches to improve integrative analyses of microbiome data.
 
 
 
