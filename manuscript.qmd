@@ -314,7 +314,7 @@ statistical analyses [@kuhn2026].
 
 Microbiome data scientists increasingly face the practical challenges of
 integrating heterogeneous and high-dimensional observations across multiple
-data modalities into scalable and reproducible workflows [@ragan-kelley2013;@callahan2016;@holmes2019].
+data modalities into scalable and reproducible workflows [@ragan-kelley2013; @callahan2016; @holmes2019].
 The unique statistical properties and complexity of microbiome data
 necessitate specialized approaches [@moreno-indias2021; @jeganathan2021; @willis2019; @bastiaanssen_bugs1_2023; @bastiaanssen_bugs2_2023], yet the diversity of proposed solutions and inconsistent outcomes
 [@nearing2022; @pelto2025; @gamboa-tuz2025] can make it
