@@ -1447,7 +1447,7 @@ analyses. The book is versioned according to the Bioconductor's biannual
 release cycle. The work incorporates rich feedback from the user community and
 microbiome training courses. The OMA book aligns to a broader Bioconductor convention, where prominent data structures [@huber2015; @ramos2017; @huang2021]
 designed for multi-table data integration have been described across several
-domains, such as single-cell omics (OSCA book [@amezquita2020]) and spatial transcriptomics (OSTA book [@crowell2025OSTA]). These resources use standard data containers to support statistical programming on interlinked multi-table datasets.
+domains, such as single-cell omics (OSCA book [@amezquita2020]) and spatial transcriptomics (OSTA book [@crowell2025]). These resources use standard data containers to support statistical programming on interlinked multi-table datasets.
 
 **Interactive applications.** Graphical user interfaces provide accessible entry points. The iSEEtree and miaDash packages facilitate the interactive analysis and
 visualization of microbiome data [@benedetti2025]. The former extends iSEE interactive graphics to hierarchical data by adding support for the TreeSE class, whereas
