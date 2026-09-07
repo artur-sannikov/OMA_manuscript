@@ -301,7 +301,7 @@ multiple data modalities into scalable and reproducible workflows
 \citep{ragan-kelley2013, callahan2016, holmes2019}. The unique
 statistical properties and complexity of microbiome data necessitate
 specialized approaches
-\citep{moreno-indias2021, jeganathan2021, willis2019, bastiaanssen_bugs1_2023, bastiaanssen_bugs2_2023},
+\citep{moreno-indias2021, jeganathan2021, willis2019, bastiaanssen2023_1, bastiaanssen2023_2},
 yet the diversity of proposed solutions and inconsistent outcomes
 \citep{nearing2022, pelto2025, gamboa-tuz2025} can make it difficult to
 identify the suitable methods and build interoperable workflows
@@ -441,31 +441,38 @@ transformations or agglomeration. By inheriting full compatibility with
 SE and SCE, TreeSE enables the development of modular, interoperable
 workflows across the Bioconductor ecosystem.
 
-\begin{center}
-\includegraphics[height=\textheight]{figures/data_containers.png}
-\end{center}
-\captionof{figure}{\textbf{Integrative Bioconductor containers for microbiome data.}
-\textbf{(a) SummarizedExperiment (SE)} \cite{huber2015} is a generic container
-for single-omics experiments. It accommodates \textit{assays} that describe the
-feature abundances in each sample (\textit{e.g.}, taxonomic units, resistance
-genes, or predicted functions), and tabular side information on each sample
-(\textit{colData}) and feature (\textit{rowData}), \textit{e.g.}, the taxonomic
-classification.
-\textbf{(b) TreeSummarizedExperiment (TreeSE)} \cite{huang2021} supports
-hierarchical, multi-table microbiome analysis. In addition to the SE elements,
-TreeSE incorporates tree information on feature hierarchies, such as
-phylogenetic relations between the taxonomic units (\textit{rowTree}) or host
-species (\textit{colTree}), and results of dimensionality reduction
-(\textit{reducedDims}). TreeSE can thus link multiple abundance tables
-and their transformed versions (\textit{e.g.}, statistical transformation,
-taxonomic agglomeration, or dimensionality reduction) with tabular and
-hierarchical side information on the features (rows) and samples (columns).
-Additional slots for reference sequences and experiment metadata are available.
-\textbf{(c) MultiAssayExperiment (MAE)} \cite{ramos2017} facilitates the
-integration of interlinked datasets representing different omics modalities
-linked by potentially non-trivial sample mappings. Figure adapted from \cite{ramos2017}.}
+\begin{figure}
 
-\label{fig:datacontainers}
+\centering{
+
+\includegraphics[width=0.5\textwidth,height=\textheight]{figures/data_containers.png}
+
+}
+
+\caption{\label{fig-datacontainers}\textbf{Integrative Bioconductor
+containers for microbiome data.} \textbf{(a) SummarizedExperiment (SE)}
+\cite{huber2015} is a generic container for single-omics experiments. It
+accommodates \emph{assays} that describe the feature abundances in each
+sample (\emph{e.g.}, taxonomic units, resistance genes, or predicted
+functions), and tabular side information on each sample (\emph{colData})
+and feature (\emph{rowData}), \emph{e.g.}, the taxonomic classification.
+\textbf{(b) TreeSummarizedExperiment (TreeSE)} \cite{huang2021} supports
+hierarchical, multi-table microbiome analysis. In addition to the SE
+elements, TreeSE incorporates tree information on feature hierarchies,
+such as phylogenetic relations between the taxonomic units
+(\emph{rowTree}) or host species (\emph{colTree}), and results of
+dimensionality reduction (\emph{reducedDims}). TreeSE can thus link
+multiple abundance tables and their transformed versions (\emph{e.g.},
+statistical transformation, taxonomic agglomeration, or dimensionality
+reduction) with tabular and hierarchical side information on the
+features (rows) and samples (columns). Additional slots for reference
+sequences and experiment metadata are available. \textbf{(c)
+MultiAssayExperiment (MAE)} \cite{ramos2017} facilitates the integration
+of interlinked datasets representing different omics modalities linked
+by potentially non-trivial sample mappings. Figure adapted from
+\cite{ramos2017}.}
+
+\end{figure}%
 
 \textbf{Multi-assay data structures.} Contemporary microbiome research
 frequently involves data across multiple omics modalities for enhanced
@@ -757,7 +764,7 @@ tables are one of the most commonly encountered data types in
 contemporary microbiome studies. Common assay types include
 amplicon-based marker gene studies (\emph{e.g.}, 16S rRNA) and
 metagenomic sequencing, processed with methods such as MetaPhlAn
-\citep{blanco2023} or Greengenes2 \citep{mcDonald2024}. Alternative
+\citep{blanco2023} or Greengenes2 \citep{mcdonald2024}. Alternative
 profiling techniques are available, including phylogenetic microarrays
 \citep{rajilicstojanovic2009} and high-density optical mapping
 \citep{abakumov2024}. Tabular abundance data can also arise from
@@ -915,7 +922,7 @@ resources for microbiome analysis are maintained in the online book.
 \textbf{Community indicators.} Various general indicators are available
 to quantify the microbial community state or other sample properties.
 Community diversity is a common measure in microbial ecology and
-epidemiology \citep{bastiaanssen_bugs1_2023}
+epidemiology \citep{bastiaanssen2023_1}
 (Figure~\ref{fig-downstream_analyses}). Alpha diversity metrics
 generally quantify the observed or estimated number of distinct taxa
 (\emph{richness}) and their distribution (\emph{evenness}). Many
@@ -941,7 +948,7 @@ frequently applied to measure also resistome diversity
 diversity measures, which can be used for quantitative comparisons of
 multivariate community composition. Our framework supports common
 dissimilarity metrics in microbiome research, including Bray-Curtis,
-Jaccard, Aitchison \citep{bastiaanssen_bugs1_2023}, and the accelerated
+Jaccard, Aitchison \citep{bastiaanssen2023_1}, and the accelerated
 phylogeny-aware (striped) UniFrac \citep{mcdonald2018}. Community
 dissimilarity is commonly visualized with unsupervised ordination that
 projects data onto a lower-dimensional space. Among unsupervised
@@ -1131,7 +1138,7 @@ in cross-language integration will further lower the barriers for
 cross-utilizing tools across complementary environments. This can be
 enhanced by additional workflow management tools such as \emph{targets}
 in R \citep{landau2021} or \emph{Nextflow} for cross-language operations
-\citep{di2017nextflow}.
+\citep{di2017}.
 
 \begin{figure}
 
@@ -1260,7 +1267,7 @@ through these channels, regular meetings, and training workshops.
 
 \textbf{Microbiome research} has shifted towards integrative analyses
 linking various omics towards enhanced mechanistic and causal insights
-\citep{joos2024, bastiaanssen_bugs1_2023}. Technological advances in
+\citep{joos2024, bastiaanssen2023_1}. Technological advances in
 long-read sequencing, functional assays, spatial profiling, and
 single-cell analysis have created an increasing demand for integrative
 techniques to link microbiome data with other omics along varying
