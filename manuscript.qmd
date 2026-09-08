@@ -1294,7 +1294,7 @@ statistical ecosystem and interoperability with dedicated omics tools and other
 computational environments. We anticipate that the ongoing developments in
 cross-language integration will further lower the barriers for cross-utilizing
 tools across complementary environments. This can be enhanced by additional
-workflow management tools such as *targets* in R [@landau2021] or *Nextflow*
+workflow management tools such as targets in R [@landau2021] or Nextflow
 for cross-language operations [@di2017].
 
 ```{r}
