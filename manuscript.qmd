@@ -723,7 +723,7 @@ user-friendly solutions, supporting efficient end-to-end workflows for
 microbiome research. Bioconductor emphasizes broad interoperability and shared
 statistical programming infrastructure with other areas of omics research, and
 primarily serves the R community. To facilitate migration from alternative
-frameworks, the OMA book provides cheat sheets, conversion tables and utility
+frameworks, the OMA book (Chapters 4 and 5, Appendix A) provides conversion tables and utility
 functions to convert between TreeSE and many external data formats.
 
 Quantitative comparisons indicate enhanced scalability over commonly used
@@ -1093,7 +1093,7 @@ The following sections provide an overview of some of the currently available
 tools, encompassing standard methods for taxonomic, metagenomic, and functional
 abundance tables as well as integrative analyses between modalities. A
 comprehensive set of recommendations and resources for microbiome analysis are
-maintained in the online book.
+maintained in the online book (Chapter 2).
 
 **Community indicators.** Various general indicators are available
 to quantify the microbial community state or other sample
