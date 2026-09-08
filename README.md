@@ -14,9 +14,12 @@ only using Quarto files, based on the
 ├── data/ # Data files used in the article
 ├── fig.eps # EPS figure used in the manuscript
 ├── figures/ # Additional figures
-├── manuscript.qmd # Main Quarto source file
+├── manuscript.qmd # Main Quarto source file (Edit this)
 ├── manuscript.tex # Generated LaTeX source
 ├── manuscript.pdf # Rendered PDF output
+├── supplementary.qmd # Supplementary material source file
+├── supplementary.tex # Generated LaTeX source for supplementary material
+├── supplementary.pdf # Rendered PDF output for supplementary material
 ├── README.md # Project documentation
 ├── sn-apacite.bst # BibTeX style file (APA citation style)
 ├── sn-aps.bst # BibTeX style file (APS style)
