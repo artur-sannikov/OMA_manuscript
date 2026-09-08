@@ -937,9 +937,11 @@ computationally demanding than abundance-based metrics. A recent
 implementation, the Stacked Faith's Phylogenetic Diversity, improves
 computational efficiency by 1--2 orders of magnitude
 \citep{armstrong2021} by an optimized single-pass algorithm and
-utilizing data sparsity. The framework supports analyses with repeated
-rarefaction through the mia package \citep{schloss2024b}. Other global
-indices of community state include measures of dominance, rarity,
+utilizing data sparsity. The framework supports a broad range of
+phylogenetic-aware and non-phylogenetic metrics, covering both
+prevalence- and abundance-based approaches, along with repeated
+rarefaction \citep{schloss2024b} through the \emph{mia} package. Other
+global indices of community state include measures of dominance, rarity,
 skewness, kurtosis, modality, library size (number of reads), or
 absolute abundance quantification. Sample information in the TreeSE
 object (colData) can be enriched with these derived quantities. By
@@ -1156,18 +1158,19 @@ workflows in the Bioconductor ecosystem.} The figure demonstrates a
 range of single-omic and multi-omic analytical approaches available for
 microbiome research. Using a publicly available multi-omics mouse
 dataset (taxonomic and metabolomic measurements) \citep{hintikka2021},
-we illustrate: \textbf{(a)} taxonomic visualization through phylogenetic
-trees and abundance heatmaps; \textbf{(b--d)} common single-omic
-analyses including Faith's phylogenetic diversity \citep{armstrong2021},
-community composition ordination (dbRDA based on UniFrac dissimilarities
-\citep{lozupone2005}), and differential prevalence testing
-\citep{nickols2026}; and \textbf{(e--f)} multi-omic integration
-strategies combining microbiota and metabolomics data through
-unsupervised dimensionality reduction (Joint-RPCA \citep{vargas2026}) to
-identify shared variation across data layers, and supervised machine
-learning (IntegratedLearner \citep{mallick2024}) to rank features by
-their strength of association with experimental conditions or phenotypes
-of interest.}
+we illustrate: \textbf{(a) Taxonomic visualization} with phylogenetic
+trees and abundance heatmaps; \textbf{(b) Community indicators} based on
+Faith's phylogenetic diversity \citep{armstrong2021}; \textbf{(c)
+Community similarity} using dbRDA based on UniFrac dissimilarities
+\citep{lozupone2005}; \textbf{(d) Association analysis} with
+differential prevalence testing \citep{nickols2026}; \textbf{(e)
+Joint-RPCA biplot} \citep{vargas2026} and \textbf{(f) Supervised feature
+ranking with IntegratedLearner} \citep{mallick2024}, illustrating
+multi-omic integration of microbiota and metabolomics data. The former
+uses unsupervised dimensionality reduction to identify shared variation
+across data layers, whereas the latter uses supervised machine learning
+to rank features by their strength of association with experimental
+conditions or phenotypes.}
 
 \end{figure}%
 
