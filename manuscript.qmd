@@ -1109,7 +1109,7 @@ abundance-based metrics. A recent implementation, the Stacked Faith's
 Phylogenetic Diversity, improves computational efficiency by 1&ndash;2
 orders of magnitude [@armstrong2021] by an optimized single-pass algorithm and
 utilizing data sparsity. The framework supports a broad range of
-phylogenetic-aware and non-phylogenetic metrics, covering both prevalence-
+phylogeny-aware and non-phylogenetic metrics, covering both prevalence-
 and abundance-based approaches, along with repeated rarefaction
 [@schloss2024b] through the *mia* package. Other
 global indices of community state include measures of dominance,
