@@ -27,6 +27,7 @@ contains further details on the benchmark execution and reproducibility.
 ├── supplementary.tex # Generated LaTeX source for supplementary material
 ├── supplementary.pdf # Rendered PDF output for supplementary material
 ├── README.md # Project documentation
+├── inst/scripts # Scripts for benchmarking (Metalog data import, analysis, visualization)
 ├── sn-apacite.bst # BibTeX style file (APA citation style)
 ├── sn-aps.bst # BibTeX style file (APS style)
 ├── sn-basic.bst # BibTeX style file (Basic Springer style)
